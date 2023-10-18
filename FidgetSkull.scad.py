@@ -82,21 +82,23 @@ def skull_outline(R):
 
 if __name__ == '__main__':
     R = 62
-    fn = 100
+    fn = 10
     twist = 15
     slices=50
+    slices=5
     scale=.8
     gap = 6
-    gaps = [8,7.5,7,6.5,6,5.5]
+    gaps = [8,7.5,7,6.5,6]
     drops = list(itertools.accumulate(gaps, initial=0))
 
     final = sd.union()(*[ring(R-drop, 1.2, height=10, twist=twist, slices=slices, scale=scale) for drop in drops])
     R2 = R-drops[-1]-4
     inner_skull = sd.intersection()(
-        ring(R2, 1.2, height=10, twist=twist, slices=slices, scale=scale, full=True),
-        sd.linear_extrude(height=30, center=True)(skull(R2))
+        ring(R, 1.2, height=10, twist=twist, slices=slices, scale=scale, full=True),
+        sd.linear_extrude(height=30, center=True)(skull(R))
         )
-    final += inner_skull
+    final += sd.scale([.38,.38,1])(inner_skull)
+    # final = inner_skull
     final = sd.scad_render(final, file_header=f'$fn={fn};')
     print(final)
 
