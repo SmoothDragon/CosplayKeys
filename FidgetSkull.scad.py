@@ -82,7 +82,7 @@ def skull_outline(R):
 
 if __name__ == '__main__':
     R = 62
-    fn = 10
+    fn = 256
     twist = 15
     slices=50
     slices=5
