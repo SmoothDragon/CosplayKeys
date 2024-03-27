@@ -9,7 +9,7 @@ import solid as sd
 
 
 if __name__ == '__main__':
-    fn = 256
+    fn = 512
     d_lip = 100
     h_lip = 20
     h_wall = 5
