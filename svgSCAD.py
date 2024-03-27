@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import solid as sd
+import solid2 as sd
 import numpy as np
 import pathlib
 import tempfile
@@ -90,7 +90,7 @@ class scadSVG:
         return '\n'.join(svg_lines)
 
 
-import solid as sd
+import solid2 as sd
 
 
 # Useful 2D functions
@@ -152,6 +152,20 @@ def hexagram(R):
     wedge = sd.circle(R, segments=3)
     wedge += sd.rotate([0,0,180])(wedge),
     return wedge
+
+def egg(r):
+    '''Create an egg shape from one variable.
+    r = radius of semicircle on one side
+    2r = radius of transition curve
+    smaller radius end cap
+    '''
+    r2 = (2-2**.5)*r
+    base = sd.circle(r=r)
+    base += sd.translate([-r,0])(sd.circle(r=2*r) & sector(45))
+    base += sd.mirror([1,0])(sd.translate([-r,0])(sd.circle(r=2*r) & sector(45)))
+    base += sd.translate([0, r])(sd.circle(r=r2))
+    return base
+
 
 if __name__ == '__main__':
     import doctest
