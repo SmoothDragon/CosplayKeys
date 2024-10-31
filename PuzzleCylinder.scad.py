@@ -11,16 +11,17 @@ If lines are added added to the sides, then the spiralize mode would need to be 
 import solid2 as sd
 
 def puzzle_box_base():
-    tip = .4
+    tip = 1
     gap = .1
     d_puzz = 100
     h_puzz = 50
     ridge = 4
     epsilon = 0.01
     MAX = 1000
+    h_base = 2
 
     final = sd.cylinder(d=d_puzz, h=h_puzz)
-    final -= sd.translate([0,0,1])(sd.cylinder(d=d_puzz-4*tip, h=h_puzz))
+    final -= sd.translate([0,0,h_base])(sd.cylinder(d=d_puzz-4*tip, h=h_puzz))
     final -= sd.translate([0,MAX/2-(d_puzz-4*tip)/2,0])(sd.cube([gap,MAX,MAX], center=True))
     top = sd.cylinder(d1=d_puzz, d2=d_puzz-2*ridge-2*gap, h=ridge)
     top -= sd.translate([0,0,-epsilon])(sd.cylinder(d1=d_puzz-4*tip, d2=d_puzz-2*ridge-2*gap-4*tip, h=ridge+2*epsilon))

@@ -8,14 +8,9 @@ import numpy as np
 
 
 if __name__ == '__main__':
-    fn = 256
+    fn = 64
     d_ball = 100
-    angle = 50
 
-    final = sd.sphere(d=d_ball)
-    cutter = sd.cube(d_ball, center=True)
-    cutter = sd.translate([0,0,(np.sqrt(2)/4+.5)*d_ball])(cutter)
-    cutter = sd.union()(*[sd.rotate([180*i/fn,0,0])(cutter) for i in range(fn)])
 
     cutter = sd.square(d_ball, center=True)
     cutter = sd.rotate(-45)(cutter)
@@ -25,6 +20,7 @@ if __name__ == '__main__':
     cutter = sd.translate([0,0,d_ball*2**-.5])(cutter)
     cutter = sd.union()(*[sd.rotate([180*i/fn,0,0])(cutter) for i in range(fn+1)])
 
+    final = sd.sphere(d=d_ball)
     final -= cutter
     final -= sd.sphere(d=d_ball*.9)
     upper = sd.cube(d_ball*4, center=True)
